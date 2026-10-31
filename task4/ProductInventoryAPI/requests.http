@@ -1,0 +1,98 @@
+### Needs the "REST Client" VS Code extension (humao.rest-client). Click "Send Request" above each block.
+@base = http://localhost:3000/products
+
+### 1. Create products
+POST {{base}}
+Content-Type: application/json
+
+{ "name": "iPhone 15", "price": 999.99, "stock": 50, "category": "Electronics" }
+
+###
+POST {{base}}
+Content-Type: application/json
+
+{ "name": "Samsung TV", "price": 499.99, "stock": 20, "category": "Electronics" }
+
+###
+POST {{base}}
+Content-Type: application/json
+
+{ "name": "Running Shoes", "price": 89.99, "stock": 100, "category": "Sports" }
+
+###
+POST {{base}}
+Content-Type: application/json
+
+{ "name": "Notebook", "price": 4.99, "stock": 200, "category": "Stationery" }
+
+### 2. Read
+GET {{base}}
+
+###
+GET {{base}}/1
+
+###
+GET {{base}}/999
+
+###
+GET {{base}}/category/Electronics
+
+###
+GET {{base}}/search?keyword=phone
+
+###
+GET {{base}}/search?keyword=s
+
+### 3. Update / Toggle
+PATCH {{base}}/1
+Content-Type: application/json
+
+{ "price": 899.99, "stock": 45 }
+
+###
+PATCH {{base}}/1
+Content-Type: application/json
+
+{ "name": "" }
+
+###
+PUT {{base}}/1
+Content-Type: application/json
+
+{ "name": "iPhone 15 Pro", "price": 1099.99, "stock": 30, "category": "Electronics" }
+
+###
+PUT {{base}}/1
+Content-Type: application/json
+
+{ "price": 799.99 }
+
+###
+PATCH {{base}}/1/toggle
+
+### 4. Delete
+DELETE {{base}}/4
+
+### 5. Validation errors
+POST {{base}}
+Content-Type: application/json
+
+{ "price": 10, "category": "Sports" }
+
+###
+POST {{base}}
+Content-Type: application/json
+
+{ "name": "Bad", "price": -5, "category": "Sports" }
+
+###
+POST {{base}}
+Content-Type: application/json
+
+{ "name": "Extra", "price": 5, "category": "Sports", "color": "red" }
+
+###
+POST {{base}}
+Content-Type: application/json
+
+{}
